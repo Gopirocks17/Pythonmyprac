@@ -1,0 +1,118 @@
+Introspection tools
+getattr(obj,attr) gives value
+use dir instead of climb using __bases__,__class__,__name__
+to avoid name collision use _ or __ before method or attribute
+with a Python feature called object persistence—
+making objects live on after the program that creates them exits. As a final step in this tutorial, let’s make our objects permanent.
+pickle,dbm,shelve
+pickle-it’s clever enough to convert the
+object to a string of bytes, which it can use later to reconstruct the original object in memory
+the shelve module provides an extra layer of structure that allows
+you to store pickled objects by key.shelve translates an object to its pickled string with pickle and stores that string under a key in a dbm file
+data attribute - inside class but outside methods
+an abstract superclass—a class that expects parts of its behavior to be
+provided by its subclasses
+raise NotImplementedError('action must be defined!'), asser false,''
+__dict__ contains attributes of it for instances, methods for classes
+in 3.x __bases__ visit till object class while 2.x visit only till userdefined base class
+to access docstring import docstr , docstr.__doc__ ,docstr.spam.method.__doc__
+__get__item(self,index) -> x[2] 2 is index automatically run method
+__index__ method returns integer when instance needed
+python uses __iter__ and __get__index method as fallback option. __next__ method
+generator functions and expressions implicitly save their state and create
+the methods required to conform to the iteration protocol
+>To achieve the multiple-iterator effect,
+__iter__ simply needs to define a new stateful object for the iterator, instead of re-
+turning self for each iterator request.
+Multiple iterators with yield
+fallout for __bool__ is __len__
+membership in -fallout  - __contains__,__iter__,__getitem__
+__repr__ is interacive echo,__str__ is print method	
+__setattr__ inside use __dict__ to avoid infinite loop
+__call__ method makes instance callable eg-c=co(),c(1,2) and useful in API interfaces.
+closure - function inside function for state retention
+eg -def A(color):
+	def B():
+	   print(color)
+	return B
+cb3 = A('yellow')
+cb3()
+One option is to use default arguments in
+lambda functions:
+cb4 = (lambda color='red': 'turn ' + color) # Defaults retain state too
+print(cb4())
+bound methods- ob=x.n  -no call
+ ob() - call 
+__cmp__ not available in python 3. __lt__  __gt__   __del__ -destructor ,__bool__ in 3.x __nonzero__ in 2.x
+for delegation
+coding patterns, you may need to redefine operator overloading meth-
+ods in wrapper classes (either by hand, by tools, or by superclasses) if
+they are used by embedded objects and you want them to be intercepted
+in new-style classes.
+mangling access by _class__attribute
+You can also pass classes to functions that
+generate arbitrary kinds of objects; such functions are sometimes called factories in
+OOP design circles
+the most common way multiple inheritance is used is to “mix in” general-
+purpose methods from superclasses. Such superclasses are usually called mix-in classes
+—they provide methods you add to application classes by inheritance
+DFLR ordering -depth first left right ,diamond order in new style classes
+slots seem the most strongly associated with an instance; they store data
+on instances, even though their names don’t appear in instance namespace dictionaries
+properties and descriptors
+1.displaying slots names as attributes of classes instead of instances is technically more accurate
+__getitem__ indexing method only
+extend classes(also built-in class) by subclassing
+1.identifying syntactic difference for new-style classes is that they are
+derived from either a built-in type, such as list , or a special built-in class known as object . 
+1.Classes are now types, and types are now classes
+1.X[I] is roughly equivalent to X.__geti
+tem__(I) for classic classes, but type(X).__getitem__(X, I) for new-style classes
+1.classes are now in-
+stances of metaclasses, and because metaclasses can define built-in operator methods
+to process the classes they generate
+__mro__,c.mro()
+get error when attribute not in __slots__ accessed.
+
+Our next new-style extension is properties—a mechanism that provides another way
+for new-style classes to define methods called automatically for access or assignment
+to instance attributes. This feature is similar to properties (a.k.a. “getters” and “setters”) in languages like Java and C#.
+age = property(getage, setage, None, None)
+descriptor -__get__ and __set__ methods
+static methods work roughly like simple instance-less
+functions inside a class, and class methods are passed a class instead of an instance.
+decorator - @example  - method=example(method)
+with as - __enter__ and __exit__ methods
+
+unittest.TestCase  -asserEqual() ,unittest.main(),setup()
+https://api.github.com/search/repositories?q=language:python&sort=stars 
+here ? signify argument to be passed,q for query, import requests
+Pygal- visualizing repositories
+
+static method- class method takes cls as first parameter while a static method needs no specific parameters.
+A class method can access or modify class state while a static method can’t access or modify it.
+
+programming python
+------------------
+import pickle ,pickle.dump(),pickle.load()
+pickle files require to be opened in binary mode
+Shelves automatically pickle objects to and from a keyed-access filesystem
+refactoring code - calling superclass method and customize it
+>ORMs (object relational mappers) such as SQLObject and SqlAlchemy offer another
+approach which retains the Python class view, but translates it to and from relational
+database tables—in a sense providing the best of both worlds, with Python class syntax
+on top, and enterprise-level databases underneath.
+
+ 
+Django
+------
+virtualenv name, source name/bin/activate,deactivate
+practical -
+
+
+cucumber
+--------
+BDD-behaviour driven 
+gherkin language -plain English
+
+
